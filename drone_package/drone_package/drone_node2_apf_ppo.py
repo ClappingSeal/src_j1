@@ -142,7 +142,7 @@ class DroneNode2(Node):
         else:
             env = APFEnvironment(current_position)
 
-            get_state = env.apf_rev_rotate(goal=self.goal_position, obs_pos=self.other_drones_positions)
+            get_state = env.apf_rev_rotate(goal=self.goal_position, obs_info=self.other_drones_positions)
             state = np.concatenate((
                 get_state[0],
                 get_state[1],
@@ -159,7 +159,7 @@ class DroneNode2(Node):
             b = env.apf_inverse_rotate(goal, obstacles, b)
 
             next_position = current_position + np.array(
-                env.apf_drl(goal=self.goal_position, obs_pos=self.other_drones_positions, a=a, b=b)) * self.force
+                env.apf_drl(goal=self.goal_position, obs_info=self.other_drones_positions, a=a, b=b)) * self.force
 
             self.goto(next_position[0], next_position[1], 6)
 
