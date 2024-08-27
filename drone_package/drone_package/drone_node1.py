@@ -139,7 +139,7 @@ class DroneNode1(Node):
         else:
             env = APFEnvironment(current_position)
             next_position = current_position + np.array(
-                env.apf(goal=self.goal_position, obs_pos=self.other_drones_positions)) * self.force
+                env.apf(goal=self.goal_position, obs_info=self.other_drones_positions)) * self.force
             self.goto(next_position[0], next_position[1], 4)
 
     # takeoff function
