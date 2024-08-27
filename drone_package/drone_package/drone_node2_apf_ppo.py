@@ -60,7 +60,7 @@ class DroneNode2(Node):
         self.force = 5
 
         model_path = '/home/qwer/ros2_study/src_j1/drone_package/drone_package/ppo_robot.zip'
-        self.model = TD3.load(model_path)
+        self.model = PPO.load(model_path)
 
     # for Publisher Node
     def publish_position(self):
