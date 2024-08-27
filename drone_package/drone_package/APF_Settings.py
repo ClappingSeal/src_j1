@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class APFEnv:
+class APFEnvironment:
     def __init__(self, pos):
         self.pos = np.array(pos, dtype=float)
         self.limit = 3
