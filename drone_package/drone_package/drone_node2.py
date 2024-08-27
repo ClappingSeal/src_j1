@@ -80,7 +80,7 @@ class DroneNode2(Node):
             self.position.y = y
             self.position.z = z
         else:
-            self.other_drones_positions[drone_id] = np.array([x, y, 5])
+            self.other_drones_positions[drone_id] = np.array([x, y, 3])
 
     # path_planning Sub Function1
     def calculate_position(self):
