@@ -59,7 +59,7 @@ class DroneNode2(Node):
         self.landing_threshold = 1.0
         self.force = 5
 
-        model_path = '/home/qwer/ros2_study/src_j1/drone_package/drone_package/ppo_robot.zip'
+        model_path = '/home/asdf/ros2_study/src_j1/drone_package/drone_package/ppo_robot.zip'
         self.model = PPO.load(model_path)
 
     # for Publisher Node
