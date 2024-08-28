@@ -140,6 +140,7 @@ class DroneNode1(Node):
             self.land()
         else:
             env = APFEnvironment(current_position[:2])
+            print(self.other_drones_positions)
             next_position = current_position[:2] + np.array(
                 env.apf(goal=self.goal_position[:2], obs_info=self.other_drones_positions)) * self.force
             self.goto(next_position[0], next_position[1], 4)
