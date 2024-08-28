@@ -63,7 +63,6 @@ class DroneNode2(Node):
 
         model_path = '/home/asdf/ros2_study/src_j1/drone_package/drone_package/ppo_robot.zip'
         self.model = PPO.load(model_path)
-        self.start_path_planning()
 
     # for Publisher Node
     def publish_position(self):
