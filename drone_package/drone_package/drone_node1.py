@@ -140,17 +140,20 @@ class DroneNode1(Node):
             self.land()
         else:
             env = APFEnvironment(current_position[:2])
-
-            processed_obstacles = {}
-            for drone_id, pos in self.other_drones_positions.items():
-                x, y = self.calculate_position()[:2]
-                r = pos[2]
-                processed_obstacles[drone_id] = np.array([x, y, r])
-
-            print(processed_obstacles)
             
+            processed_obstacles = []
+            for pos in self.other_drones_positions.values():
+                x, y = pos[:2]
+                r = pos[2]
+                processed_obstacles.append([x, y, r])
+    
+            processed_obstacles = np.array(processed_obstacles)
+    
+            print(processed_obstacles)
+    
             next_position = current_position[:2] + np.array(
                 env.apf(goal=self.goal_position[:2], obs_info=processed_obstacles)) * self.force
+            
             self.goto(next_position[0], next_position[1], 4)
 
     # takeoff function
