@@ -158,7 +158,7 @@ class DroneNode2(Node):
 
             a = action[0]
             b = [action[1], action[2]]
-            b = env.apf_inverse_rotate(self.goal_position[:2], self.other_drones_positionss, b)
+            b = env.apf_inverse_rotate(self.goal_position[:2], self.other_drones_positions, b)
 
             next_position = current_position[:2] + np.array(
                 env.apf_drl(goal=self.goal_position[:2], obs_info=self.other_drones_positions, a=a, b=b)) * self.force
