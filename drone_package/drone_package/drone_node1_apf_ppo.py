@@ -63,6 +63,7 @@ class DroneNode1(Node):
 
         model_path = '/home/qwer/ros2_study/src_j1/drone_package/drone_package/ppo_robot.zip'
         self.model = PPO.load(model_path)
+        self.start_path_planning()
 
     # for Publisher Node
     def publish_position(self):
@@ -142,7 +143,16 @@ class DroneNode1(Node):
         else:
             env = APFEnvironment(current_position[:2])
 
-            get_state = env.apf_rev_rotate(goal=self.goal_position[:2], obs_info=self.other_drones_positions)
+            processed_obstacles = []
+            for pos in self.other_drones_positions.values():
+                x, y = pos[:2]
+                r = pos[2]
+                processed_obstacles.append([x, y, r])
+    
+            processed_obstacles = np.array(processed_obstacles)
+
+
+            get_state = env.apf_rev_rotate(goal=self.goal_position[:2], processed_obstacles)
             state = np.concatenate((
                 get_state[0],
                 get_state[1],
@@ -156,10 +166,10 @@ class DroneNode1(Node):
 
             a = action[0]
             b = [action[1], action[2]]
-            b = env.apf_inverse_rotate(self.goal_position[:2], self.other_drones_positions, b)
+            b = env.apf_inverse_rotate(self.goal_position[:2], processed_obstacles, b)
 
             next_position = current_position[:2] + np.array(
-                env.apf_drl(goal=self.goal_position[:2], obs_info=self.other_drones_positions, a=a, b=b)) * self.force
+                env.apf_drl(goal=self.goal_position[:2], processed_obstacles, a=a, b=b)) * self.force
 
             self.goto(next_position[0], next_position[1], 4)
 
