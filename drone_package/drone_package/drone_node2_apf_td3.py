@@ -149,7 +149,7 @@ class DroneNode2(Node):
                 get_state[0],
                 get_state[1],
                 get_state[2],
-                np.array([np.linalg.norm(env.goal_vector(goal=self.goal_position[:2]))])
+                np.array([np.linalg.norm(env.heuristic(goal=self.goal_position[:2]))])
             ))
 
             expected_obs_shape = self.model.policy.observation_space.shape[0]
