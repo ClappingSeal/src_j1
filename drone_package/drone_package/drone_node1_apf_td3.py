@@ -63,7 +63,6 @@ class DroneNode1(Node):
 
         model_path = '/home/qwer/ros2_study/src_j1/drone_package/drone_package/td3_robot.zip'
         self.model = TD3.load(model_path)
-        self.start_path_planning()
         
     # for Publisher Node
     def publish_position(self):
