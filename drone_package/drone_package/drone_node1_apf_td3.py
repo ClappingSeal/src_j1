@@ -140,7 +140,7 @@ class DroneNode1(Node):
             print("Goal reached. Initiating landing sequence.")
             self.land()
         else:
-            env = APFEnvironment(current_position)
+            env = APFEnvironment(current_position[:2])
 
             get_state = env.apf_rev_rotate(goal=self.goal_position[:2], obs_info=self.other_drones_positions)
             state = np.concatenate((
@@ -158,7 +158,7 @@ class DroneNode1(Node):
             b = [action[1], action[2]]
             b = env.apf_inverse_rotate(self.goal_position[:2], self.other_drones_positions, b)
 
-            next_position = current_position + np.array(
+            next_position = current_position[:2] + np.array(
                 env.apf_drl(goal=self.goal_position[:2], obs_info=self.other_drones_positions, a=a, b=b)) * self.force
 
             self.goto(next_position[0], next_position[1], 4)
