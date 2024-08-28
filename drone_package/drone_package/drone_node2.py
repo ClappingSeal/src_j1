@@ -59,6 +59,8 @@ class DroneNode2(Node):
         self.landing_threshold = 1.0
         self.force = 5
 
+        self.start_path_planning()
+
     # for Publisher Node
     def publish_position(self):
         location = self.vehicle.location.global_relative_frame
