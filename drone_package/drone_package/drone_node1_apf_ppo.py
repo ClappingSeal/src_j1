@@ -151,7 +151,7 @@ class DroneNode1(Node):
     
             processed_obstacles = np.array(processed_obstacles)
 
-
+            print(self.goal_position[:2], processed_obstacles)
             get_state = env.apf_rev_rotate(goal=self.goal_position[:2], processed_obstacles)
             state = np.concatenate((
                 get_state[0],
