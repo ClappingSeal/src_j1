@@ -1,6 +1,6 @@
 import numpy as np
 
-
+# bbbbbbb
 class APFEnvironment:
     def __init__(self, pos):
         self.pos = np.array(pos, dtype=float)
